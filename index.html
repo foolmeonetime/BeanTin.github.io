@@ -27,7 +27,7 @@
             width: 100px; /* Set the width of the button images */
             height: 100px; /* Set the height of the button images */
             display: block; /* Ensure images are displayed as block elements */
-            margin: 10px auto; /* Center the images horizontally and add bottom margin */
+            margin: 0px auto; /* Center the images horizontally and add bottom margin */
         }
         /* Style for input fields */
         input[type="text"],
@@ -38,7 +38,7 @@
             padding: 5px; /* Add padding */
             width: 150px; /* Set the width */
             height: 25px; /* Set the height */
-            margin-bottom: -10px; /* Add bottom margin */
+            margin-bottom: 35px; /* Add bottom margin */
         }
         /* Container for input and button */
         .input-container {
@@ -99,102 +99,36 @@
         const { useState, useEffect } = React;
 
         const DAppFunctionality = ({ playerAddress }) => {
-            const [referrer, setReferrer] = useState('');
+            const [inputValue, setInputValue] = useState('');
             const [joinStatus, setJoinStatus] = useState('');
-            const [playerAddressInput, setPlayerAddressInput] = useState('');
             const [inviteStatus, setInviteStatus] = useState('');
-            const [mineStatus, setMineStatus] = useState('');
-            const [withdrawAmount, setWithdrawAmount] = useState('');
             const [withdrawStatus, setWithdrawStatus] = useState('');
-            const [points, setPoints] = useState(0);
-            const [referralCount, setReferralCount] = useState(0);
-            const [invitationsReceived, setInvitationsReceived] = useState([]);
-
-            useEffect(() => {
-                const fetchData = async () => {
-                    try {
-                        // Fetch data from the blockchain or server here
-                        // Example:
-                        // const playerPoints = await beanGameInstance.points(playerAddress);
-                        // const playerReferralCount = await beanGameInstance.checkReferralCount(playerAddress);
-                        // setPoints(playerPoints.toNumber());
-                        // setReferralCount(playerReferralCount.toNumber());
-
-                        // Fetch team invitations
-                        const invitations = await beanGameInstance.checkTeamInvitations();
-                        setInvitationsReceived(invitations);
-                    } catch (error) {
-                        console.error('Error fetching points, referral count, and invitations:', error);
-                    }
-                };
-
-                fetchData();
-            }, [playerAddress]);
+            const [mineStatus, setMineStatus] = useState('');
 
             const handleJoinGame = async () => {
-                try {
-                    // Call the smart contract function to join the game
-                    // Example:
-                    // await beanGameInstance.joinGame(referrer);
-                    // setJoinStatus('Joined successfully!');
-                } catch (error) {
-                    console.error('Error joining game:', error);
-                    setJoinStatus('Error joining game');
-                }
+                // Implement join game functionality using inputValue
             };
 
             const handleInviteToTeam = async () => {
-                try {
-                    // Call the smart contract function to invite to team
-                    // Example:
-                    // await beanGameInstance.inviteToTeam(playerAddressInput);
-                    // setInviteStatus('Invitation sent successfully!');
-                } catch (error) {
-                    console.error('Error inviting to team:', error);
-                    setInviteStatus('Error sending invitation');
-                }
-            };
-
-            const handleAcceptTeamInvite = async (teamOwner) => {
-                try {
-                    // Call the smart contract function to accept team invitation
-                    // Example:
-                    // await beanGameInstance.acceptTeamInvite(teamOwner);
-                    // Update invitations received state after accepting invitation
-                    setInvitationsReceived(invitationsReceived.filter(invitation => invitation !== teamOwner));
-                } catch (error) {
-                    console.error('Error accepting team invitation:', error);
-                }
-            };
-
-            const handleMineTokens = async () => {
-                try {
-                    // Call the smart contract function to mine tokens
-                    // Example:
-                    // await beanGameInstance.mineTokens();
-                    // setMineStatus('Tokens mined successfully!');
-                } catch (error) {
-                    console.error('Error mining tokens:', error);
-                    setMineStatus('Error mining tokens');
-                }
+                // Implement invite to team functionality using inputValue
             };
 
             const handleWithdrawTokens = async () => {
-                try {
-                    // Call the smart contract function to withdraw tokens
-                    // Example:
-                    // await beanGameInstance.withdrawBeans(withdrawAmount);
-                    // setWithdrawStatus('Tokens withdrawn successfully!');
-                } catch (error) {
-                    console.error('Error withdrawing tokens:', error);
-                    setWithdrawStatus('Error withdrawing tokens');
-                }
+                // Implement withdraw tokens functionality using inputValue
+            };
+
+            const handleMineTokens = async () => {
+                // Implement mine tokens functionality using inputValue
+                setMineStatus('Mining...');
+                // Example: Call the smart contract function to mine tokens
+                // await beanGameInstance.mineTokens();
+                // setMineStatus('Tokens mined successfully!');
             };
 
             return (
                 <div>
                     <div className="input-container">
-                        <input type="text" className="form-control" placeholder="Referrer address" value={referrer} onChange={(e) => setReferrer(e.target.value)} />
+                        <input type="text" className="form-control" placeholder="Enter value" value={inputValue} onChange={(e) => setInputValue(e.target.value)} />
                         <a href="#" onClick={handleJoinGame}>
                             <img src="theTin/project/i1EXxx-4.png" alt="Join Game" className="button-img" />
                             <p className="button-text">Join</p>
@@ -203,12 +137,19 @@
                     </div>
 
                     <div className="input-container">
-                        <input type="text" className="form-control" placeholder="Player address" value={playerAddressInput} onChange={(e) => setPlayerAddressInput(e.target.value)} />
                         <a href="#" onClick={handleInviteToTeam}>
                             <img src="theTin/project/i1EXxx-4.png" alt="Invite to Team" className="button-img" />
                             <p className="button-text">Invite</p>
                         </a>
                         <p>{inviteStatus}</p>
+                    </div>
+
+                    <div className="input-container">
+                        <a href="#" onClick={handleWithdrawTokens}>
+                            <img src="theTin/project/i1EXxx-4.png" alt="Withdraw Tokens" className="button-img" />
+                            <p className="button-text">Withdraw</p>
+                        </a>
+                        <p>{withdrawStatus}</p>
                     </div>
 
                     <div className="input-container">
@@ -218,34 +159,24 @@
                         </a>
                         <p>{mineStatus}</p>
                     </div>
-
-                    <div className="input-container">
-                        <input type="number" className="form-control" placeholder="Amount to withdraw" value={withdrawAmount} onChange={(e) => setWithdrawAmount(e.target.value)} />
-                        <a href="#" onClick={handleWithdrawTokens}>
-                            <img src="theTin/project/i1EXxx-4.png" alt="Withdraw Tokens" className="button-img" />
-                            <p className="button-text">Withdraw</p>
-                        </a>
-                        <p>{withdrawStatus}</p>
-                    </div>
-
-                    <div>
-                        <p>Points: {points}</p>
-                        <p>Referral Count: {referralCount}</p>
-                    </div>
                 </div>
             );
         };
 
         const connectMetaMask = async () => {
+            // Check if MetaMask is installed
             if (typeof window.ethereum !== 'undefined') {
+                // MetaMask is installed
                 try {
+                    // Request access to the user's MetaMask accounts
                     await window.ethereum.request({ method: 'eth_requestAccounts' });
-                    console.log('MetaMask connected');
+                    console.log('Connected to MetaMask!');
                 } catch (error) {
-                    console.error('User denied account access');
+                    console.error(error);
                 }
             } else {
-                console.error('Please install MetaMask to use this feature');
+                // MetaMask is not installed
+                console.log('MetaMask is not installed.');
             }
         };
 
