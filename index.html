@@ -3,226 +3,59 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>DApp Functionality</title>
+    <title>Bean Game DApp</title>
     <!-- Include Bootstrap CSS (optional) -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
-    <!-- CSS for background image and custom styles -->
-    <style>
-        body {
-            background-image: url(theTin/project/jqk-Cszm.jpg);
-            background-size: cover; /* Ensure the image covers the entire background */
-            background-position: center; /* Center the background image */
-            background-repeat: no-repeat; /* Prevent the background image from repeating */
-        }
-        .container {
-            text-align: center; /* Center align all content inside the container */
-            margin-top: 50px; /* Add top margin */
-            position: relative; /* Make the container relative for absolute positioning */
-        }
-        .button {
-            display: inline-block;
-            margin: 10px; /* Adjust spacing as needed */
-        }
-        .button-img {
-            width: 100px; /* Set the width of the button images */
-            height: 100px; /* Set the height of the button images */
-            display: block; /* Ensure images are displayed as block elements */
-            margin: 0px auto; /* Center the images horizontally and add bottom margin */
-        }
-        /* Style for input fields */
-        input[type="text"],
-        input[type="number"] {
-            background-color: rgba(255, 255, 255, 0.5); /* Set the background color with opacity */
-            border: 1px solid #ccc; /* Add a border */
-            border-radius: 5px; /* Add border radius */
-            padding: 5px; /* Add padding */
-            width: 150px; /* Set the width */
-            height: 25px; /* Set the height */
-            margin-bottom: 35px; /* Add bottom margin */
-        }
-        /* Container for input and button */
-        .input-container {
-            display: flex;
-            flex-direction: column; /* Arrange items vertically */
-            align-items: center; /* Center items horizontally */
-        }
-        /* Style for button text */
-        .button-text {
-            position: relative; /* Change position to relative */
-            top: -20px; /* Move text up */
-            color: white; /* Text color */
-        }
-        #connectButton {
-            position: absolute;
-            top: 20px; /* Adjust the top spacing */
-            right: 20px; /* Adjust the right spacing */
-        }
-        .dropdown {
-            position: absolute;
-            top: 20px; /* Adjust the top spacing */
-            left: 20px; /* Adjust the left spacing */
-        }
-        .dropdown-menu {
-            position: absolute;
-            left: 0; /* Adjust the left spacing */
-            top: 40px; /* Adjust the top spacing */
-        }
-    </style>
+    <!-- Include custom styles -->
+    <link rel="stylesheet" href="css/styles.css">
 </head>
 <body>
-    <div class="container">
-        <h1 class="mb-4"></h1>
-        <!-- Connect MetaMask button as image -->
-        <button id="connectButton" class="btn btn-primary button">Connect MetaMask</button>
+    <header>
+        <h1>Bean Game</h1>
         <!-- Dropdown for team invitations -->
         <div class="dropdown">
-            <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false">
-                Team Invitations
-            </button>
-            <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+            <label for="invitationDropdown">Select Invitation</label>
+            <select class="form-select" id="invitationDropdown">
+                <option value="" disabled selected>Select Invitation</option>
                 <!-- Invitations will be populated dynamically -->
-            </ul>
+            </select>
+            <button class="btn btn-primary" id="acceptInvitationButton">Accept Invitation</button>
         </div>
-        <div id="app"></div>
-    </div>
+        <!-- Connect MetaMask button -->
+        <button id="connectButton" class="btn btn-primary">Connect MetaMask</button>
+    </header>
 
-    <!-- Include React and Babel for JSX compilation -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/react/17.0.2/umd/react.production.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/react-dom/17.0.2/umd/react-dom.production.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/babel-standalone/6.26.0/babel.min.js"></script>
+    <main class="container">
+        <!-- Text input field for referral address or withdrawal amount -->
+        <div class="input-container">
+            <input type="text" class="form-control" placeholder="Type here" id="inputBox">
+        </div>
+
+        <!-- Buttons for game functionality -->
+        <div class="input-container">
+            <button class="btn btn-primary" id="joinGameButton">
+                <span>Join Game</span>
+            </button>
+            <button class="btn btn-primary" id="inviteToTeamButton">
+                <span>Invite to Team</span>
+            </button>
+            <button class="btn btn-primary" id="withdrawTokensButton">
+                <span>Withdraw Tokens</span>
+            </button>
+            <button class="btn btn-primary" id="mineTokensButton">
+                <span>Mine Tokens</span>
+            </button>
+        </div>
+    </main>
+
+    <footer>
+        <!-- Your footer content here -->
+    </footer>
 
     <!-- Include Web3.js -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/web3/1.3.5/web3.min.js"></script>
-
-    <!-- JavaScript Functionality -->
-    <script type="text/babel">
-        const { useState, useEffect } = React;
-
-        const DAppFunctionality = ({ playerAddress }) => {
-            const [inputValue, setInputValue] = useState('');
-            const [joinStatus, setJoinStatus] = useState('');
-            const [inviteStatus, setInviteStatus] = useState('');
-            const [withdrawStatus, setWithdrawStatus] = useState('');
-            const [mineStatus, setMineStatus] = useState('');
-
-            const handleJoinGame = async () => {
-                const playerAddress = inputValue.trim();
-                if (playerAddress !== '') {
-                    try {
-                        // Call the joinGame function of the smart contract
-                        await beanGameInstance.methods.joinGame(playerAddress).send({ from: playerAddress });
-                        setJoinStatus('Joined the game successfully!');
-                    } catch (error) {
-                        console.error(error);
-                        setJoinStatus('Failed to join the game.');
-                    }
-                } else {
-                    setJoinStatus('Please enter a valid player address.');
-                }
-            };
-
-            const handleInviteToTeam = async () => {
-                const playerAddress = inputValue.trim();
-                if (playerAddress !== '') {
-                    try {
-                        // Call the inviteToTeam function of the smart contract
-                        await beanGameInstance.methods.inviteToTeam(playerAddress).send({ from: playerAddress });
-                        setInviteStatus('Invited to team successfully!');
-                    } catch (error) {
-                        console.error(error);
-                        setInviteStatus('Failed to invite to team.');
-                    }
-                } else {
-                    setInviteStatus('Please enter a valid player address.');
-                }
-            };
-
-            const handleWithdrawTokens = async () => {
-                const amount = parseInt(inputValue);
-                if (!isNaN(amount) && amount > 0) {
-                    try {
-                        // Call the withdrawBeans function of the smart contract
-                        await beanGameInstance.methods.withdrawBeans(amount).send({ from: playerAddress });
-                        setWithdrawStatus('Tokens withdrawn successfully!');
-                    } catch (error) {
-                        console.error(error);
-                        setWithdrawStatus('Failed to withdraw tokens.');
-                    }
-                } else {
-                    setWithdrawStatus('Please enter a valid amount to withdraw.');
-                }
-            };
-
-            const handleMineTokens = async () => {
-                try {
-                    // Call the mineTokens function of the smart contract
-                    await beanGameInstance.methods.mineTokens().send({ from: playerAddress });
-                    setMineStatus('Tokens mined successfully!');
-                } catch (error) {
-                    console.error(error);
-                    setMineStatus('Failed to mine tokens.');
-                }
-            };
-
-            return (
-                <div>
-                    <div className="input-container">
-                        <input type="text" className="form-control" placeholder="Enter value" value={inputValue} onChange={(e) => setInputValue(e.target.value)} />
-                        <a href="#" onClick={handleJoinGame}>
-                            <img src="theTin/project/i1EXxx-4.png" alt="Join Game" className="button-img" />
-                            <p className="button-text">Join</p>
-                        </a>
-                        <p>{joinStatus}</p>
-                    </div>
-
-                    <div className="input-container">
-                        <a href="#" onClick={handleInviteToTeam}>
-                            <img src="theTin/project/i1EXxx-4.png" alt="Invite to Team" className="button-img" />
-                            <p className="button-text">Invite</p>
-                        </a>
-                        <p>{inviteStatus}</p>
-                    </div>
-
-                    <div className="input-container">
-                        <a href="#" onClick={handleWithdrawTokens}>
-                            <img src="theTin/project/i1EXxx-4.png" alt="Withdraw Tokens" className="button-img" />
-                            <p className="button-text">Withdraw</p>
-                        </a>
-                        <p>{withdrawStatus}</p>
-                    </div>
-
-                    <div className="input-container">
-                        <a href="#" onClick={handleMineTokens}>
-                            <img src="theTin/project/i1EXxx-4.png" alt="Mine Tokens" className="button-img" />
-                            <p className="button-text">Mine</p>
-                        </a>
-                        <p>{mineStatus}</p>
-                    </div>
-                </div>
-            );
-        };
-
-        const connectMetaMask = async () => {
-            // Check if MetaMask is installed
-            if (typeof window.ethereum !== 'undefined') {
-                // MetaMask is installed
-                try {
-                    // Request access to the user's MetaMask accounts
-                    await window.ethereum.request({ method: 'eth_requestAccounts' });
-                    console.log('Connected to MetaMask!');
-                } catch (error) {
-                    console.error(error);
-                }
-            } else {
-                // MetaMask is not installed
-                console.log('MetaMask is not installed.');
-            }
-        };
-
-        ReactDOM.render(<DAppFunctionality playerAddress="PLAYER_ADDRESS" />, document.getElementById('app'));
-
-        document.getElementById('connectButton').addEventListener('click', connectMetaMask);
-    </script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/web3/1.3.5/web3.min.js" async></script>
+    <!-- Include your JavaScript file -->
+    <script src="dapp.js" type="module" defer></script>
 </body>
 </html>
 
