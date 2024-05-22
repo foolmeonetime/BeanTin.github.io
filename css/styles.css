@@ -1,14 +1,16 @@
-/* CSS for background image and custom styles */
+/* styles.css */
+
+/* General styles */
 body {
     background-image: url("../background.jpg");
     background-size: cover;
     background-repeat: no-repeat;
-    font-family: sans-serif; /* Change font to sans-serif */
-    color: white; /* Default text color */
+    font-family: 'Press Start 2P', sans-serif; /* Change font to a pixelated game font */
+    color: #fff; /* Default text color */
 }
 
 .container {
-    max-width: 600px;
+    max-width: 800px; /* Increase max-width to accommodate wider buttons */
     margin: auto;
     padding: 20px;
     text-align: center; /* Center align contents */
@@ -16,8 +18,11 @@ body {
 }
 
 .input-container {
-    margin-top: 120px; /* Adjust spacing between input box and buttons */
+    margin-top: 60px; /* Reduce margin-top to bring buttons closer to input boxes */
     margin-bottom: 10px;
+    display: flex; /* Use flexbox to align content */
+    flex-direction: column; /* Stack content vertically */
+    align-items: center; /* Center align items horizontally */
 }
 
 /* Connect MetaMask button positioned to the top right */
@@ -25,10 +30,10 @@ body {
     position: absolute;
     top: 20px;
     right: 20px;
-    background-color: #4CAF50; /* Green background color */
+    background-color: #ff3604; /* Green background color */
     padding: 10px 20px; /* Add padding to make button clickable */
     border-radius: 5px; /* Add rounded corners */
-    color: white; /* Text color */
+    color: #fff; /* Text color */
     border: none; /* Remove default button border */
     cursor: pointer; /* Add cursor pointer on hover */
     transition: background-color 0.3s; /* Add smooth transition */
@@ -36,58 +41,83 @@ body {
 
 /* Hover effect for Connect MetaMask button */
 #connectWalletBtn:hover {
-    background-color: #45a049; /* Darker green on hover */
+    background-color: #fceb03; /* Darker green on hover */
 }
 
-/* Style for buttons */
-.input-container .btn {
-    margin-top: 20px; /* Add spacing between buttons */
-    display: inline-block; /* Display buttons inline */
-    background-color: #008CBA; /* Blue background color */
+/* Common button styles */
+.btn {
+    display: flex; /* Use flexbox to align content vertically */
+    flex-direction: column; /* Stack content vertically */
+    align-items: center; /* Center align items horizontally */
     padding: 10px 20px; /* Add padding to make buttons clickable */
-    border-radius: 5px; /* Add rounded corners */
-    color: white; /* Text color */
-    border: none; /* Remove default button border */
+    color: transparent; /* Hide text */
     cursor: pointer; /* Add cursor pointer on hover */
     transition: background-color 0.3s; /* Add smooth transition */
-}
-
-/* Hover effect for buttons */
-.input-container .btn:hover {
-    background-color: #005f76; /* Darker blue on hover */
-}
-
-/* Style for input box */
-.input-container input[type="text"] {
-    width: 100%;
-    background-color: rgba(255, 255, 255, 0.8); /* Translucent white background */
-    border: none;
-    padding: 10px;
-    border-radius: 5px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Optional: Add a shadow for depth */
-    color: #333; /* Text color */
-    font-family: sans-serif; /* Change font to sans-serif */
-    transition: background-color 0.3s; /* Add smooth transition */
-}
-
-/* Hover effect for input box */
-.input-container input[type="text"]:hover,
-.input-container input[type="text"]:focus {
-    background-color: rgba(255, 255, 255, 1); /* White background on hover/focus */
-}
-
-/* Style for Mine and Claim Rewards buttons */
-header .btn {
-    background-color: #008CBA; /* Blue background color */
-    padding: 10px 20px; /* Add padding to make buttons clickable */
-    border-radius: 5px; /* Add rounded corners */
-    color: white; /* Text color */
+    text-align: center; /* Center the text */
+    font-size: 0; /* Hide font */
     border: none; /* Remove default button border */
-    cursor: pointer; /* Add cursor pointer on hover */
-    transition: background-color 0.3s; /* Add smooth transition */
+    background-color: transparent; /* Set background to transparent */
 }
 
-/* Hover effect for Mine and Claim Rewards buttons */
-header .btn:hover {
-    background-color: #005f76; /* Darker blue on hover */
+/* Style for image buttons */
+.btn.btn-image {
+    background-repeat: no-repeat; /* Prevent image from repeating */
+    background-position: center; /* Center the background image */
+    background-size: contain; /* Ensure entire image fits within the button */
+    width: 150px; /* Adjust width as needed */
+    height: 90px; /* Adjust height as needed */
+}
+
+/* Claim Rewards button image */
+#claimRewardsBtn.btn-image {
+    background-image: url('../bean.png'); /* Replace with the path to your image */
+}
+
+/* Mine button image */
+#mineBtn.btn-image {
+    background-image: url('../bean.png'); /* Replace with the path to your image */
+}
+
+/* Join Game button image */
+#joinGameBtn.btn-image {
+    background-image: url('../bean.png'); /* Replace with the path to your image */
+}
+
+/* Accept Invite button image */
+#acceptInviteBtn.btn-image {
+    background-image: url('../bean.png'); /* Replace with the path to your image */
+}
+
+/* Create Team button image */
+#createTeamBtn.btn-image {
+    background-image: url('../bean.png'); /* Replace with the path to your image */
+}
+
+/* Invite button image */
+#inviteBtn.btn-image {
+    background-image: url('../bean.png'); /* Replace with the path to your image */
+}
+
+/* Text styles */
+.btn .btn-text {
+    color: #ff9203; /* Text color */
+    font-size: 12px; /* Font size */
+    font-family: 'Press Start 2P', sans-serif; /* Font family */
+    text-shadow: 2px 2px 4px rgb(230, 1, 1); /* Add text shadow for a game-like effect */
+}
+
+h1 {
+    color: rgb(255, 153, 0); /* Set h1 text color to orange */
+    text-shadow: 2px 2px 4px #000; /* Add black shadow to h1 text */
+}
+
+/* Responsive Styles */
+@media screen and (max-width: 600px) {
+    /* Adjustments for smaller screens */
+    .container {
+        padding: 10px;
+    }
+    .input-container {
+        margin-top: 30px;
+    }
 }
