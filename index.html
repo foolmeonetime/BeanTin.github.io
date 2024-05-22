@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Game Token Interaction</title>
+    <!-- Include Web3.js -->
+    <script src="https://cdn.jsdelivr.net/npm/web3@1.5.3/dist/web3.min.js"></script>
+    <!-- Include your JavaScript file -->
+    <script src="dapp.js"></script>
+    <!-- Include your CSS file (if any) -->
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+    <!-- Connect wallet button placed in the header -->
+    <button id="connectWalletBtn">Connect Wallet</button>
+    <div id="walletDetails"></div>
+
+    <header>
+        <h1></h1>
+        <div>
+            <!-- Button to claim rewards -->
+            <button class="btn" id="claimRewardsBtn">Claim Rewards</button>
+            <!-- Button to mine -->
+            <button class="btn" id="mineBtn">Mine</button>
+        </div>
+    </header>
+
+    <div class="container">
+        <!-- Input field and button to join the game -->
+        <div class="input-container">
+            <label for="referralAddress">Referral Address:</label>
+            <input type="text" id="referralAddress">
+            <button class="btn" id="joinGameBtn">Join Game</button>
+        </div>
+
+        <!-- Input field and button to accept invite -->
+        <div class="input-container">
+            <label for="inviteId">Invite ID:</label>
+            <input type="text" id="inviteId">
+            <button class="btn" id="acceptInviteBtn">Accept Invite</button>
+        </div>
+
+        <!-- Input field and button to create team -->
+        <div class="input-container">
+            <label for="teamMembers">Team Members (comma-separated addresses):</label>
+            <input type="text" id="teamMembers">
+            <button class="btn" id="createTeamBtn">Create Team</button>
+        </div>
+
+        <!-- Input field and button to invite -->
+        <div class="input-container">
+            <label for="playerToInvite">Player to Invite:</label>
+            <input type="text" id="playerToInvite">
+            <button class="btn" id="inviteBtn">Invite</button>
+        </div>
+    </div>
+</body>
+</html>
