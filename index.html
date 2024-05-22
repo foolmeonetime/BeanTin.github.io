@@ -8,8 +8,19 @@
     <script src="https://cdn.jsdelivr.net/npm/web3@1.5.3/dist/web3.min.js"></script>
     <!-- Include your JavaScript file -->
     <script src="dapp.js"></script>
-    <!-- Include your CSS file (if any) -->
+    <!-- Include your CSS file -->
     <link rel="stylesheet" href="css/styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
+    <style>
+        /* Add this to your styles.css file */
+        label {
+            color: orange; /* Set label text color to orange */
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5); /* Add black shadow to label text */
+            font-family: 'Press Start 2P', sans-serif; /* Set font family */
+            font-size: 12px; /* Set font size */
+            margin-bottom: 5px; /* Add margin bottom */
+        }
+    </style>
 </head>
 <body>
     <!-- Connect wallet button placed in the header -->
@@ -17,12 +28,16 @@
     <div id="walletAddress"></div>
 
     <header>
-        <h1></h1>
+        <h1>The Bean Tin</h1>
         <div>
             <!-- Button to claim rewards -->
-            <button class="btn" id="claimRewardsBtn">Claim Rewards</button>
+            <button class="btn btn-image" id="claimRewardsBtn">
+                <span class="btn-text">Claim Rewards</span>
+            </button>
             <!-- Button to mine -->
-            <button class="btn" id="mineBtn">Mine</button>
+            <button class="btn btn-image" id="mineBtn">
+                <span class="btn-text">Mine</span>
+            </button>
         </div>
     </header>
 
@@ -31,28 +46,36 @@
         <div class="input-container">
             <label for="referralAddress">Referral Address:</label>
             <input type="text" id="referralAddress">
-            <button class="btn" id="joinGameBtn">Join Game</button>
+            <button class="btn btn-image" id="joinGameBtn">
+                <span class="btn-text">Join Game</span>
+            </button>
         </div>
 
         <!-- Input field and button to accept invite -->
         <div class="input-container">
             <label for="inviteId">Invite ID:</label>
             <input type="text" id="inviteId">
-            <button class="btn" id="acceptInviteBtn">Accept Invite</button>
+            <button class="btn btn-image" id="acceptInviteBtn">
+                <span class="btn-text">Accept Invite</span>
+            </button>
         </div>
 
         <!-- Input field and button to name and create team -->
         <div class="input-container">
             <label for="teamName">Team Name:</label>
             <input type="text" id="teamName">
-            <button class="btn" id="createTeamBtn">Create Team</button>
+            <button class="btn btn-image" id="createTeamBtn">
+                <span class="btn-text">Create Team</span>
+            </button>
         </div>
 
         <!-- Input field and button to invite -->
         <div class="input-container">
             <label for="playerToInvite">Player to Invite:</label>
             <input type="text" id="playerToInvite">
-            <button class="btn" id="inviteBtn">Invite</button>
+            <button class="btn btn-image" id="inviteBtn">
+                <span class="btn-text">Invite</span>
+            </button>
         </div>
     </div>
 </body>
