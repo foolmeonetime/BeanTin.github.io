@@ -1,5 +1,5 @@
 // Define the contract address
-const contractAddress = '0xf605ef4aab8f8d1663b8aa326bbfdb84e5095e93'; // Replace with your contract address
+const contractAddress = '0x5f527a035ea2f690963591552877d5160974e24a'; // Replace with your contract address
 
 // Load contract ABI asynchronously
 fetch('./GameToken.json')
@@ -50,10 +50,8 @@ fetch('./GameToken.json')
         // Handle create team button click event
         document.getElementById('createTeamBtn').addEventListener('click', async () => {
             const teamName = document.getElementById('teamName').value; // Get team name from input field
-            const teamMembersInput = document.getElementById('teamMembers').value; // Get team member addresses from input field
-            const teamMembers = teamMembersInput.split(',').map(address => address.trim()); // Convert input string to array of addresses
-            // Call createTeam function
-            await contractInstance.methods.createTeam(teamName, teamMembers).send({ from: window.ethereum.selectedAddress, value: web3.utils.toWei('0.01', 'ether') });
+            // Call createTeam function with an empty array as team members
+            await contractInstance.methods.createTeam(teamName, []).send({ from: window.ethereum.selectedAddress, value: web3.utils.toWei('0.01', 'ether') });
         });
 
         // Handle invite button click event
@@ -73,3 +71,4 @@ fetch('./GameToken.json')
     .catch(error => {
         console.error('Error loading contract ABI:', error);
     });
+
