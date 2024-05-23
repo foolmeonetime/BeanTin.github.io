@@ -1,28 +1,26 @@
-/* styles.css */
-
 /* General styles */
 body {
     background-image: url("../background1.jpg");
     background-size: cover;
     background-repeat: no-repeat;
-    font-family: 'Press Start 2P', sans-serif; /* Change font to a pixelated game font */
-    color: #fff; /* Default text color */
+    font-family: 'Press Start 2P', sans-serif;
+    color: #ffffff;
 }
 
 .container {
-    max-width: 800px; /* Increase max-width to accommodate wider buttons */
+    max-width: 800px;
     margin: auto;
     padding: 20px;
-    text-align: center; /* Center align contents */
-    position: relative; /* To position the Connect MetaMask button */
+    text-align: center;
+    position: relative;
 }
 
 .input-container {
-    margin-top: 60px; /* Reduce margin-top to bring buttons closer to input boxes */
+    margin-top: 60px;
     margin-bottom: 10px;
-    display: flex; /* Use flexbox to align content */
-    flex-direction: column; /* Stack content vertically */
-    align-items: center; /* Center align items horizontally */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 
 /* Connect MetaMask button positioned to the top right */
@@ -30,94 +28,148 @@ body {
     position: absolute;
     top: 20px;
     right: 20px;
-    background-color: #ff3604; /* Green background color */
-    padding: 10px 20px; /* Add padding to make button clickable */
-    border-radius: 5px; /* Add rounded corners */
-    color: #fff; /* Text color */
-    border: none; /* Remove default button border */
-    cursor: pointer; /* Add cursor pointer on hover */
-    transition: background-color 0.3s; /* Add smooth transition */
+    background-color: #ff3604;
+    padding: 10px 20px;
+    border-radius: 5px;
+    color: #fff;
+    border: none;
+    cursor: pointer;
+    transition: background-color 0.3s;
 }
 
 /* Hover effect for Connect MetaMask button */
 #connectWalletBtn:hover {
-    background-color: #fceb03; /* Darker green on hover */
+    background-color: #fceb03;
 }
 
 /* Common button styles */
 .btn {
-    display: flex; /* Use flexbox to align content vertically */
-    flex-direction: column; /* Stack content vertically */
-    align-items: center; /* Center align items horizontally */
-    padding: 10px 20px; /* Add padding to make buttons clickable */
-    color: transparent; /* Hide text */
-    cursor: pointer; /* Add cursor pointer on hover */
-    transition: background-color 0.3s; /* Add smooth transition */
-    text-align: center; /* Center the text */
-    font-size: 0; /* Hide font */
-    border: none; /* Remove default button border */
-    background-color: transparent; /* Set background to transparent */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 10px 20px;
+    color: transparent;
+    cursor: pointer;
+    transition: background-color 0.3s, transform 0.3s; /* Added transition for transform property */
+    text-align: center;
+    font-size: 0;
+    border: none;
+    background-color: transparent;
+}
+
+/* Hover effect for buttons */
+.btn:hover {
+    transform: scale(1.05); /* Scale the button slightly larger on hover */
 }
 
 /* Style for image buttons */
 .btn.btn-image {
-    background-repeat: no-repeat; /* Prevent image from repeating */
-    background-position: center; /* Center the background image */
-    background-size: contain; /* Ensure entire image fits within the button */
-    width: 150px; /* Adjust width as needed */
-    height: 90px; /* Adjust height as needed */
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: contain;
+    width: 150px;
+    height: 90px;
 }
 
 /* Claim Rewards button image */
 #claimRewardsBtn.btn-image {
-    background-image: url('../bean.png'); /* Replace with the path to your image */
+    background-image: url('../bean.png');
 }
 
 /* Mine button image */
 #mineBtn.btn-image {
-    background-image: url('../bean.png'); /* Replace with the path to your image */
+    background-image: url('../bean.png');
 }
 
 /* Join Game button image */
 #joinGameBtn.btn-image {
-    background-image: url('../bean.png'); /* Replace with the path to your image */
+    background-image: url('../bean.png');
 }
 
 /* Accept Invite button image */
 #acceptInviteBtn.btn-image {
-    background-image: url('../bean.png'); /* Replace with the path to your image */
+    background-image: url('../bean.png');
 }
 
 /* Create Team button image */
 #createTeamBtn.btn-image {
-    background-image: url('../bean.png'); /* Replace with the path to your image */
+    background-image: url('../bean.png');
 }
 
 /* Invite button image */
 #inviteBtn.btn-image {
-    background-image: url('../bean.png'); /* Replace with the path to your image */
+    background-image: url('../bean.png');
 }
 
 /* Text styles */
 .btn .btn-text {
-    color: #ff9203; /* Text color */
-    font-size: 12px; /* Font size */
-    font-family: 'Press Start 2P', sans-serif; /* Font family */
-    text-shadow: 2px 2px 4px rgb(230, 1, 1); /* Add text shadow for a game-like effect */
+    color: #ff9203;
+    font-size: 12px;
+    font-family: 'Press Start 2P', sans-serif;
+    text-shadow: 2px 2px 4px rgb(230, 1, 1);
 }
 
 h1 {
-    color: rgb(255, 153, 0); /* Set h1 text color to orange */
-    text-shadow: 2px 2px 4px #000; /* Add black shadow to h1 text */
+    color: rgb(255, 153, 0);
+    text-shadow: 2px 2px 4px #000;
 }
 
-/* Responsive Styles */
-@media screen and (max-width: 600px) {
-    /* Adjustments for smaller screens */
-    .container {
-        padding: 10px;
+/* Input box styles */
+.input-container input[type="text"] {
+    background-color: transparent;
+    border: none;
+    border-bottom: 2px solid #fff;
+    color: orange;
+    padding: 10px;
+    margin-bottom: 20px;
+    width: 100%;
+    font-family: 'Press Start 2P', sans-serif;
+    font-size: 16px;
+    transition: border-color 0.3s;
+    animation: pulseBorder 2s infinite;
+}
+
+/* Pulsing border animation */
+@keyframes pulseBorder {
+    0% {
+        border-color: #f19e02;
     }
-    .input-container {
-        margin-top: 30px;
+    50% {
+        border-color: #000000;
+    }
+    100% {
+        border-color: transparent;
     }
 }
+
+/* Orange rain effect */
+@keyframes orangeRain {
+    0% {
+        transform: translateY(-100%);
+        opacity: 0;
+    }
+    100% {
+        transform: translateY(100vh);
+        opacity: 1;
+    }
+}
+
+#rainEffectContainer {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+}
+
+.orange-drop {
+    position: absolute;
+    width: 2px;
+    height: 2px;
+    background-color: orange;
+    border-radius: 50%;
+    opacity: 0.5;
+    animation: orangeRain 1.5s linear infinite;
+}
+
