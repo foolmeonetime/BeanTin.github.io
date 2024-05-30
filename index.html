@@ -13,7 +13,22 @@
     <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
     
     <!-- Content Security Policy (CSP) meta tag -->
-    <meta http-equiv="Content-Security-Policy" content="default-src 'none'; style-src 'self' https://fonts.googleapis.com; script-src 'self' https://cdn.jsdelivr.net;">
+    <meta http-equiv="Content-Security-Policy" content="
+    default-src 'none';            /* Default source is 'none' */
+    script-src 'self'              /* Allow scripts from the same origin */,
+               https://cdn.jsdelivr.net; /* Allow scripts from jsdelivr CDN */
+    style-src 'self'               /* Allow styles from the same origin */,
+              https://fonts.googleapis.com; /* Allow styles from Google Fonts CDN */
+    img-src 'self'                 /* Allow images from the same origin */,
+             <URL>;                 /* Allow images from the specified URL */,
+    font-src 'self'                /* Allow fonts from the same origin */,
+             https://fonts.gstatic.com; /* Allow fonts from Google Fonts CDN */
+    object-src 'none';             /* Disallow <object> elements */,
+    media-src 'self';              /* Allow media from the same origin */,
+    frame-src 'none';              /* Disallow <frame> elements */,
+    base-uri 'self';               /* Allow the <base> URI to be same-origin */,
+    connect-src 'self'             /* Allow connections from the same origin */,
+                https://api.example.com; /* Allow connections to the API server */">
 </head>
 <body>
     <!-- Connect wallet button placed in the header -->
