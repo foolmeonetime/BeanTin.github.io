@@ -1,7 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta http-equiv="Content-Security-Policy" content="default-src 'none';">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Game Token Interaction</title>
@@ -12,6 +11,9 @@
     <!-- Include your CSS file -->
     <link rel="stylesheet" href="css/styles.css">
     <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
+    
+    <!-- Content Security Policy (CSP) meta tag -->
+    <meta http-equiv="Content-Security-Policy" content="default-src 'none'; style-src 'self' https://fonts.googleapis.com; script-src 'self' https://cdn.jsdelivr.net;">
 </head>
 <body>
     <!-- Connect wallet button placed in the header -->
@@ -99,3 +101,4 @@
     </a>
 </body>
 </html>
+
