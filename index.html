@@ -4,13 +4,14 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Game Token Interaction</title>
-    <!-- Include Web3.js -->
-    <script src="https://cdn.jsdelivr.net/npm/web3@1.5.3/dist/web3.min.js"></script>
-    <!-- Include your JavaScript file -->
+    <!-- Include Web3.js without cache busting -->
+    <script src="https://cdn.jsdelivr.net/npm/web3@1.5.3/dist/web3.min.js?_cacheBuster_=timestamp"></script>
+    <!-- Include your JavaScript file without cache busting -->
     <script src="dapp.js"></script>
-    <!-- Include your CSS file -->
+    <!-- Include your CSS file without cache busting -->
     <link rel="stylesheet" href="css/styles.css">
-    <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
+    <!-- Include Google Fonts stylesheet without cache busting -->
+    <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap&_cacheBuster_=timestamp" rel="stylesheet">
 </head>
 <body>
     <!-- Connect wallet button placed in the header -->
@@ -96,6 +97,16 @@
     <a href="https://x.com/TheBeanTin" target="_blank" rel="noopener noreferrer">
         <img src="twitter-x-logo-png-9.png" alt="Twitter" class="twitter-logo">
     </a>
+
+    <script>
+       // Generate cache buster value
+    const cacheBuster = Date.now();
+    
+    // Update resource URLs with cache busting
+    document.querySelector('script[src^="https://cdn.jsdelivr.net/npm/web3"]').src += '?_cacheBuster_=' + cacheBuster;
+    document.querySelector('script[src="dapp.js"]').src += '?_cacheBuster_=' + cacheBuster;
+    document.querySelector('link[href^="https://fonts.googleapis.com/css2"]').href += '?_cacheBuster_=' + cacheBuster;
+    document.querySelector('link[href="css/styles.css"]').href += '?_cacheBuster_=' + cacheBuster;
+    </script>
 </body>
 </html>
-
