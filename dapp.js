@@ -1,5 +1,5 @@
 // Define the contract address
-onst contractAddress = '0x5487a0c0c32e4d0140f7d824e7499e8c3275c1ff'; // Replace with your contract address
+const contractAddress = '0x5487a0c0c32e4d0140f7d824e7499e8c3275c1ff'; // Replace with your contract address
 
 // Load contract ABI asynchronously
 fetch('./GameToken.json')
