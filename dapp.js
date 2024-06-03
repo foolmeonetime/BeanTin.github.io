@@ -35,6 +35,21 @@ document.addEventListener('DOMContentLoaded', async function() {
             }
         }
 
+        // Function to check if enough time has passed since the last mine
+        function canMine() {
+            const lastMinedTimestamp = localStorage.getItem('lastMinedTimestamp');
+            if (!lastMinedTimestamp) {
+                return true; // Allow mining if no timestamp is stored
+            }
+
+            const now = new Date().getTime();
+            const lastMinedTime = parseInt(lastMinedTimestamp, 10);
+            const elapsedTimeSinceLastMine = now - lastMinedTime;
+            const hoursSinceLastMine = elapsedTimeSinceLastMine / (1000 * 60 * 60); // Convert milliseconds to hours
+
+            return hoursSinceLastMine >= 24;
+        }
+
         // Connect wallet button click event (for MetaMask)
         document.getElementById('connectWalletBtn').addEventListener('click', async () => {
             try {
@@ -163,10 +178,18 @@ document.addEventListener('DOMContentLoaded', async function() {
 
         // Handle mine button click event
         document.getElementById('mineBtn').addEventListener('click', async () => {
+            if (!canMine()) {
+                alert('You can only mine once every 24 hours.');
+                return;
+            }
+
             try {
                 // Call mine function
                 // This function doesn't require any additional input
                 await contractInstance.methods.mine().send({ from: window.ethereum.selectedAddress });
+
+                // Update last mined timestamp
+                localStorage.setItem('lastMinedTimestamp', new Date().getTime().toString());
 
                 // Trigger orange rain effect
                 triggerOrangeRain();
