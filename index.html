@@ -6,8 +6,8 @@
     <title>Game Token Interaction</title>
     <!-- Include Web3.js with cache busting -->
     <script src="https://cdn.jsdelivr.net/npm/web3@1.5.3/dist/web3.min.js?_cacheBuster_=timestamp"></script>
-    <!-- Include your JavaScript file with cache busting -->
-    <script src="dapp.js?_cacheBuster_=timestamp"></script>
+    <!-- Include your JavaScript file without cache busting -->
+    <script src="dapp.js"></script>
     <!-- Include Google Fonts stylesheet with cache busting -->
     <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap&_cacheBuster_=timestamp" rel="stylesheet">
     <!-- Include your CSS file with cache busting -->
@@ -98,17 +98,8 @@
         <img src="twitter-x-logo-png-9.png" alt="Twitter" class="twitter-logo">
     </a>
 
-    <!-- Cache busting script -->
-    <script>
-       // Generate cache buster value
-        const cacheBuster = Date.now();
-        
-        // Update resource URLs with cache busting
-        document.querySelector('script[src^="https://cdn.jsdelivr.net/npm/web3"]').src += '?_cacheBuster_=' + cacheBuster;
-        document.querySelector('script[src="dapp.js"]').src += '?_cacheBuster_=' + cacheBuster;
-        document.querySelector('link[href^="https://fonts.googleapis.com/css2"]').href += '?_cacheBuster_=' + cacheBuster;
-        document.querySelector('link[href="css/styles.css"]').href += '?_cacheBuster_=' + cacheBuster;
-    </script>
+    <!-- Cache busting script (removed) -->
 </body>
 </html>
+
 
