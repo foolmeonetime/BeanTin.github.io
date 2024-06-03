@@ -60,7 +60,7 @@ fetch('./GameToken.json')
                 // Loop through each invitation and create list items
                 teamsWithInvites.forEach((team, index) => {
                     const listItem = document.createElement('li');
-                    listItem.innerHTML = `<strong>Team Name:</strong> ${team.teamName}, <strong>Invite Code:</strong> ${inviteCodes[index]}`;
+                    listItem.innerHTML = `<strong>Team Name:</strong> ${team.team.teamName}, <strong>Invite Code:</strong> ${inviteCodes[index]}`;
                     teamInvitationsList.appendChild(listItem);
                 });
             } catch (error) {
@@ -71,7 +71,7 @@ fetch('./GameToken.json')
         }
 
         // Handle display team invitations button click event
-        document.getElementById('displayInvitationsBtn').addEventListener('click', async () => {
+        document.getElementById('teamInvitationsList').addEventListener('click', async () => {
             // Call displayTeamInvitations function
             await displayTeamInvitations();
 
