@@ -1,10 +1,12 @@
-// Define the contract address
-const contractAddress = '0x5487a0c0c32e4d0140f7d824e7499e8c3275c1ff'; // Replace with your contract address
+document.addEventListener('DOMContentLoaded', async function() {
+    try {
+        // Define the contract address
+        const contractAddress = '0x5487a0c0c32e4d0140f7d824e7499e8c3275c1ff'; // Replace with your contract address
 
-// Load contract ABI asynchronously
-fetch('./GameToken.json')
-    .then(response => response.json())
-    .then(contractABI => {
+        // Load contract ABI asynchronously
+        const response = await fetch('./GameToken.json');
+        const contractABI = await response.json();
+
         // Initialize web3 provider from MetaMask
         const web3 = new Web3(window.ethereum);
 
@@ -44,6 +46,7 @@ fetch('./GameToken.json')
                 document.getElementById('connectWalletBtn').style.display = 'none';
             } catch (error) {
                 console.error('Error connecting wallet:', error);
+                alert('Error connecting wallet. Please try again later.');
             }
         });
 
@@ -195,7 +198,10 @@ fetch('./GameToken.json')
                 alert('Error retrieving player stats. Please try again later.');
             }
         });
-    })
-    .catch(error => {
-        console.error('Error loading contract ABI:', error);
-    });
+
+    } catch (error) {
+        console.error('Error:', error);
+        // Handle errors here
+        alert('An error occurred. Please try again later.');
+    }
+});
