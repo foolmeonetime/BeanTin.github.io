@@ -162,10 +162,19 @@ document.addEventListener('DOMContentLoaded', async function() {
 
         // Handle invite button click event
         document.getElementById('inviteBtn').addEventListener('click', async () => {
-            const playerToInvite = document.getElementById('playerToInvite').value; // Get player to invite address from input field
+            const playerToInvite = document.getElementById('playerToInvite').value.trim(); // Get player to invite address from input field
             try {
+                // Check if the input field is not empty
+                if(playerToInvite === '') {
+                    alert('Please enter the Ethereum address of the player you want to invite.');
+                    return;
+                }
+
                 // Call invite function
                 await contractInstance.methods.invite(playerToInvite).send({ from: window.ethereum.selectedAddress });
+
+                // Display success message
+                alert('Invitation sent successfully.');
 
                 // Trigger orange rain effect
                 triggerOrangeRain();
@@ -234,3 +243,4 @@ document.addEventListener('DOMContentLoaded', async function() {
         alert('An error occurred. Please try again later.');
     }
 });
+
