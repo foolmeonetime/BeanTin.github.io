@@ -78,7 +78,7 @@ body {
 }
 
 /* Mine button image */
-#mineBtn.btn-image {
+#cookBtn.btn-image {
     background-image: url('../cookpot.png');
 }
 
