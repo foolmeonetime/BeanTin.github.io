@@ -35,21 +35,6 @@ document.addEventListener('DOMContentLoaded', async function() {
             }
         }
 
-        // Function to check if enough time has passed since the last cook
-        function canCook() {
-            const lastCookedTimestamp = localStorage.getItem('lastCookedTimestamp');
-            if (!lastCookedTimestamp) {
-                return true; // Allow cooking if no timestamp is stored
-            }
-
-            const now = new Date().getTime();
-            const lastCookedTime = parseInt(lastCookedTimestamp, 10);
-            const elapsedTimeSinceLastCook = now - lastCookedTime;
-            const hoursSinceLastCook = elapsedTimeSinceLastCook / (1000 * 60 * 60); // Convert milliseconds to hours
-
-            return hoursSinceLastCook >= 24;
-        }
-
         // Connect wallet button click event (for MetaMask)
         document.getElementById('connectWalletBtn').addEventListener('click', async () => {
             try {
@@ -64,6 +49,21 @@ document.addEventListener('DOMContentLoaded', async function() {
                 alert('Error connecting wallet. Please try again later.');
             }
         });
+
+        // Function to check if enough time has passed since the last cook
+        function canCook() {
+            const lastCookedTimestamp = localStorage.getItem('lastCookedTimestamp');
+            if (!lastCookedTimestamp) {
+                return true; // Allow cooking if no timestamp is stored
+            }
+
+            const now = new Date().getTime();
+            const lastCookedTime = parseInt(lastCookedTimestamp, 10);
+            const elapsedTimeSinceLastCook = now - lastCookedTime;
+            const hoursSinceLastCook = elapsedTimeSinceLastCook / (1000 * 60 * 60); // Convert milliseconds to hours
+
+            return hoursSinceLastCook >= 24;
+        }
 
         // Function to display team invitations
         async function displayTeamInvitations() {
@@ -89,7 +89,7 @@ document.addEventListener('DOMContentLoaded', async function() {
         }
 
         // Handle display team invitations button click event
-        document.getElementById('teamInvitationsList').addEventListener('click', async () => {
+        document.getElementById('displayInvitationsBtn').addEventListener('click', async () => {
             // Call displayTeamInvitations function
             await displayTeamInvitations();
 
@@ -176,47 +176,6 @@ document.addEventListener('DOMContentLoaded', async function() {
             }
         });
 
-        document.addEventListener('DOMContentLoaded', async function() {
-            try {
-                // Your existing JavaScript code here
-        
-                // Handle cook button click event
-                document.getElementById('cookBtn').addEventListener('click', async () => {
-                    if (!canCook()) {
-                        alert('You can only cook once every 24 hours.');
-                        return;
-                    }
-        
-                    try {
-                        // Call cook function
-                        // This function doesn't require any additional input
-                        await contractInstance.methods.cook().send({ from: window.ethereum.selectedAddress });
-        
-                        // Update last cooked timestamp
-                        localStorage.setItem('lastCookedTimestamp', new Date().getTime().toString());
-        
-                        // Disable cook button for 24 hours
-                        document.getElementById('cookBtn').disabled = true;
-                        setTimeout(() => {
-                            document.getElementById('cookBtn').disabled = false;
-                        }, 24 * 60 * 60 * 1000); // 24 hours in milliseconds
-        
-                        // Trigger orange rain effect
-                        triggerOrangeRain();
-                    } catch (error) {
-                        console.error('Error cooking:', error);
-                        // Display error message in the UI
-                        alert('Error cooking. Please try again later.');
-                    }
-                });
-        
-            } catch (error) {
-                console.error('Error:', error);
-                // Handle errors here
-                alert('An error occurred. Please try again later.');
-            }
-        });
-        
         // Handle display stats button click event
         document.getElementById('displayStatsBtn').addEventListener('click', async () => {
             try {
@@ -236,6 +195,36 @@ document.addEventListener('DOMContentLoaded', async function() {
                 console.error('Error retrieving player stats:', error);
                 // Display error message in the UI
                 alert('Error retrieving player stats. Please try again later.');
+            }
+        });
+
+        // Handle cook button click event
+        document.getElementById('cookBtn').addEventListener('click', async () => {
+            if (!canCook()) {
+                alert('You can only cook once every 24 hours.');
+                return;
+            }
+
+            try {
+                // Call cook function
+                // This function doesn't require any additional input
+                await contractInstance.methods.cook().send({ from: window.ethereum.selectedAddress });
+
+                // Update last cooked timestamp
+                localStorage.setItem('lastCookedTimestamp', new Date().getTime().toString());
+
+                // Disable cook button for 24 hours
+                document.getElementById('cookBtn').disabled = true;
+                setTimeout(() => {
+                    document.getElementById('cookBtn').disabled = false;
+                }, 24 * 60 * 60 * 1000); // 24 hours in milliseconds
+
+                // Trigger orange rain effect
+                triggerOrangeRain();
+            } catch (error) {
+                console.error('Error cooking:', error);
+                // Display error message in the UI
+                alert('Error cooking. Please try again later.');
             }
         });
 
