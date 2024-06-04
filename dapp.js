@@ -35,19 +35,19 @@ document.addEventListener('DOMContentLoaded', async function() {
             }
         }
 
-        // Function to check if enough time has passed since the last mine
-        function canMine() {
-            const lastMinedTimestamp = localStorage.getItem('lastMinedTimestamp');
-            if (!lastMinedTimestamp) {
-                return true; // Allow mining if no timestamp is stored
+        // Function to check if enough time has passed since the last cook
+        function canCook() {
+            const lastCookedTimestamp = localStorage.getItem('lastCookedTimestamp');
+            if (!lastCookedTimestamp) {
+                return true; // Allow cooking if no timestamp is stored
             }
 
             const now = new Date().getTime();
-            const lastMinedTime = parseInt(lastMinedTimestamp, 10);
-            const elapsedTimeSinceLastMine = now - lastMinedTime;
-            const hoursSinceLastMine = elapsedTimeSinceLastMine / (1000 * 60 * 60); // Convert milliseconds to hours
+            const lastCookedTime = parseInt(lastCookedTimestamp, 10);
+            const elapsedTimeSinceLastCook = now - lastCookedTime;
+            const hoursSinceLastCook = elapsedTimeSinceLastCook / (1000 * 60 * 60); // Convert milliseconds to hours
 
-            return hoursSinceLastMine >= 24;
+            return hoursSinceLastCook >= 24;
         }
 
         // Connect wallet button click event (for MetaMask)
@@ -176,30 +176,47 @@ document.addEventListener('DOMContentLoaded', async function() {
             }
         });
 
-        // Handle mine button click event
-        document.getElementById('mineBtn').addEventListener('click', async () => {
-            if (!canMine()) {
-                alert('You can only mine once every 24 hours.');
-                return;
-            }
-
+        document.addEventListener('DOMContentLoaded', async function() {
             try {
-                // Call mine function
-                // This function doesn't require any additional input
-                await contractInstance.methods.mine().send({ from: window.ethereum.selectedAddress });
-
-                // Update last mined timestamp
-                localStorage.setItem('lastMinedTimestamp', new Date().getTime().toString());
-
-                // Trigger orange rain effect
-                triggerOrangeRain();
+                // Your existing JavaScript code here
+        
+                // Handle cook button click event
+                document.getElementById('cookBtn').addEventListener('click', async () => {
+                    if (!canCook()) {
+                        alert('You can only cook once every 24 hours.');
+                        return;
+                    }
+        
+                    try {
+                        // Call cook function
+                        // This function doesn't require any additional input
+                        await contractInstance.methods.cook().send({ from: window.ethereum.selectedAddress });
+        
+                        // Update last cooked timestamp
+                        localStorage.setItem('lastCookedTimestamp', new Date().getTime().toString());
+        
+                        // Disable cook button for 24 hours
+                        document.getElementById('cookBtn').disabled = true;
+                        setTimeout(() => {
+                            document.getElementById('cookBtn').disabled = false;
+                        }, 24 * 60 * 60 * 1000); // 24 hours in milliseconds
+        
+                        // Trigger orange rain effect
+                        triggerOrangeRain();
+                    } catch (error) {
+                        console.error('Error cooking:', error);
+                        // Display error message in the UI
+                        alert('Error cooking. Please try again later.');
+                    }
+                });
+        
             } catch (error) {
-                console.error('Error mining:', error);
-                // Display error message in the UI
-                alert('Error mining. Please try again later.');
+                console.error('Error:', error);
+                // Handle errors here
+                alert('An error occurred. Please try again later.');
             }
         });
-
+        
         // Handle display stats button click event
         document.getElementById('displayStatsBtn').addEventListener('click', async () => {
             try {
