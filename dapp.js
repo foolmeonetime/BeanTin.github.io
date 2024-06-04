@@ -207,35 +207,35 @@ document.addEventListener('DOMContentLoaded', async function() {
             }
         });
 
-        // Handle cook button click event
-        document.getElementById('cookBtn').addEventListener('click', async () => {
-            if (!canCook()) {
-                alert('You can only cook once every 24 hours.');
-                return;
-            }
+       // Handle cook button click event
+document.getElementById('cookBtn').addEventListener('click', async () => {
+    if (!canCook()) {
+        alert('You can only cook once every 24 hours.');
+        return;
+    }
 
-            try {
-                // Call cook function
-                // This function doesn't require any additional input
-                await contractInstance.methods.cook().send({ from: window.ethereum.selectedAddress });
+    try {
+        // Call mine function
+        await contractInstance.methods.mine().send({ from: window.ethereum.selectedAddress });
 
-                // Update last cooked timestamp
-                localStorage.setItem('lastCookedTimestamp', new Date().getTime().toString());
+        // Update last cooked timestamp
+        localStorage.setItem('lastCookedTimestamp', new Date().getTime().toString());
 
-                // Disable cook button for 24 hours
-                document.getElementById('cookBtn').disabled = true;
-                setTimeout(() => {
-                    document.getElementById('cookBtn').disabled = false;
-                }, 24 * 60 * 60 * 1000); // 24 hours in milliseconds
+        // Disable cook button for 24 hours
+        document.getElementById('cookBtn').disabled = true;
+        setTimeout(() => {
+            document.getElementById('cookBtn').disabled = false;
+        }, 24 * 60 * 60 * 1000); // 24 hours in milliseconds
 
-                // Trigger orange rain effect
-                triggerOrangeRain();
-            } catch (error) {
-                console.error('Error cooking:', error);
-                // Display error message in the UI
-                alert('Error cooking. Please try again later.');
-            }
-        });
+        // Trigger orange rain effect
+        triggerOrangeRain();
+    } catch (error) {
+        console.error('Error cooking:', error);
+        // Display error message in the UI
+        alert('Error cooking. Please try again later.');
+    }
+});
+
 
     } catch (error) {
         console.error('Error:', error);
@@ -243,4 +243,5 @@ document.addEventListener('DOMContentLoaded', async function() {
         alert('An error occurred. Please try again later.');
     }
 });
+
 
