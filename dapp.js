@@ -76,9 +76,11 @@ document.addEventListener('DOMContentLoaded', async function() {
         
                 // Loop through each invitation and create list items
                 teamsWithInvites.forEach((team) => {
-                    const listItem = document.createElement('li');
-                    listItem.innerHTML = `<strong>Team Name:</strong> ${team.teamName}, <strong>Invite Code:</strong> ${team.inviteCode}`;
-                    teamInvitationsList.appendChild(listItem);
+                    if (team.teamName !== "") { // Check if team name is not empty
+                        const listItem = document.createElement('li');
+                        listItem.innerHTML = `<strong>Team Name:</strong> ${team.teamName}, <strong>Invite Code:</strong> ${team.inviteCode}`;
+                        teamInvitationsList.appendChild(listItem);
+                    }
                 });
             } catch (error) {
                 console.error('Error retrieving team invitations:', error);
@@ -86,12 +88,7 @@ document.addEventListener('DOMContentLoaded', async function() {
                 alert('Error retrieving team invitations. Please try again later.');
             }
         }
-        
-        // Event listener for displayInvitationsBtn button click event
-        document.getElementById('displayInvitationsBtn').addEventListener('click', async () => {
-            await displayTeamInvitations();
-        });
-
+                
         // Handle join game button click event
         document.getElementById('joinGameBtn').addEventListener('click', async () => {
             const referral = document.getElementById('referralAddress').value; // Get referral address from input field
@@ -231,9 +228,11 @@ document.addEventListener('DOMContentLoaded', async function() {
             }
         });
 
+        // Button to display team invitations click event
+        document.getElementById('displayInvitationsBtn').addEventListener('click', displayTeamInvitations);
+
     } catch (error) {
         console.error('Error:', error);
-        // Handle errors here
         alert('An error occurred. Please try again later.');
     }
 });
