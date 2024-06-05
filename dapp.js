@@ -86,7 +86,12 @@ document.addEventListener('DOMContentLoaded', async function() {
                 alert('Error retrieving team invitations. Please try again later.');
             }
         }
-                
+        
+        // Event listener for displayInvitationsBtn button click event
+        document.getElementById('displayInvitationsBtn').addEventListener('click', async () => {
+            await displayTeamInvitations();
+        });
+
         // Handle join game button click event
         document.getElementById('joinGameBtn').addEventListener('click', async () => {
             const referral = document.getElementById('referralAddress').value; // Get referral address from input field
@@ -197,35 +202,34 @@ document.addEventListener('DOMContentLoaded', async function() {
             }
         });
 
-       // Handle cook button click event
-document.getElementById('cookBtn').addEventListener('click', async () => {
-    if (!canCook()) {
-        alert('You can only cook once every 24 hours.');
-        return;
-    }
+        // Handle cook button click event
+        document.getElementById('cookBtn').addEventListener('click', async () => {
+            if (!canCook()) {
+                alert('You can only cook once every 24 hours.');
+                return;
+            }
 
-    try {
-        // Call mine function
-        await contractInstance.methods.mine().send({ from: window.ethereum.selectedAddress });
+            try {
+                // Call mine function
+                await contractInstance.methods.mine().send({ from: window.ethereum.selectedAddress });
 
-        // Update last cooked timestamp
-        localStorage.setItem('lastCookedTimestamp', new Date().getTime().toString());
+                // Update last cooked timestamp
+                localStorage.setItem('lastCookedTimestamp', new Date().getTime().toString());
 
-        // Disable cook button for 24 hours
-        document.getElementById('cookBtn').disabled = true;
-        setTimeout(() => {
-            document.getElementById('cookBtn').disabled = false;
-        }, 24 * 60 * 60 * 1000); // 24 hours in milliseconds
+                // Disable cook button for 24 hours
+                document.getElementById('cookBtn').disabled = true;
+                setTimeout(() => {
+                    document.getElementById('cookBtn').disabled = false;
+                }, 24 * 60 * 60 * 1000); // 24 hours in milliseconds
 
-        // Trigger orange rain effect
-        triggerOrangeRain();
-    } catch (error) {
-        console.error('Error cooking:', error);
-        // Display error message in the UI
-        alert('Error cooking. Please try again later.');
-    }
-});
-
+                // Trigger orange rain effect
+                triggerOrangeRain();
+            } catch (error) {
+                console.error('Error cooking:', error);
+                // Display error message in the UI
+                alert('Error cooking. Please try again later.');
+            }
+        });
 
     } catch (error) {
         console.error('Error:', error);
