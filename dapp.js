@@ -68,16 +68,16 @@ document.addEventListener('DOMContentLoaded', async function() {
         async function displayTeamInvitations() {
             try {
                 // Call invitationList function to retrieve team invitations
-                const teamInvitations = await contractInstance.methods.invitationList().call({ from: window.ethereum.selectedAddress });
+                const teamsWithInvites = await contractInstance.methods.invitationList().call({ from: window.ethereum.selectedAddress });
         
                 // Clear existing list items
                 const teamInvitationsList = document.getElementById('teamInvitationsList');
                 teamInvitationsList.innerHTML = '';
         
                 // Loop through each invitation and create list items
-                teamInvitations.forEach((invitation) => {
+                teamsWithInvites.forEach((team) => {
                     const listItem = document.createElement('li');
-                    listItem.innerHTML = `<strong>Team Name:</strong> ${invitation.team.teamName}, <strong>Invite Code:</strong> ${invitation.inviteCode}`;
+                    listItem.innerHTML = `<strong>Team Name:</strong> ${team.teamName}, <strong>Invite Code:</strong> ${team.inviteCode}`;
                     teamInvitationsList.appendChild(listItem);
                 });
             } catch (error) {
@@ -86,16 +86,7 @@ document.addEventListener('DOMContentLoaded', async function() {
                 alert('Error retrieving team invitations. Please try again later.');
             }
         }
-        
-        // Handle display team invitations button click event
-        document.getElementById('displayInvitationsBtn').addEventListener('click', async () => {
-            // Call displayTeamInvitations function
-            await displayTeamInvitations();
-        
-            // Trigger orange rain effect
-            triggerOrangeRain();
-        });
-        
+                
         // Handle join game button click event
         document.getElementById('joinGameBtn').addEventListener('click', async () => {
             const referral = document.getElementById('referralAddress').value; // Get referral address from input field
