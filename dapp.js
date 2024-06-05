@@ -1,7 +1,7 @@
 document.addEventListener('DOMContentLoaded', async function() {
     try {
         // Define the contract address
-        const contractAddress = '0x5487a0c0c32e4d0140f7d824e7499e8c3275c1ff'; // Replace with your contract address
+        const contractAddress = '0x8c0d66bd6966166dfc6e2a48dd256c6a4024c9d8'; // Replace with your contract address
 
         // Load contract ABI asynchronously
         const response = await fetch('./GameToken.json');
@@ -65,20 +65,19 @@ document.addEventListener('DOMContentLoaded', async function() {
             return hoursSinceLastCook >= 24;
         }
 
-        // Function to display team invitations
         async function displayTeamInvitations() {
             try {
                 // Call invitationList function to retrieve team invitations
-                const [teamsWithInvites, inviteCodes] = await contractInstance.methods.invitationList().call({ from: window.ethereum.selectedAddress });
-
+                const teamInvitations = await contractInstance.methods.invitationList().call({ from: window.ethereum.selectedAddress });
+        
                 // Clear existing list items
                 const teamInvitationsList = document.getElementById('teamInvitationsList');
                 teamInvitationsList.innerHTML = '';
-
+        
                 // Loop through each invitation and create list items
-                teamsWithInvites.forEach((team, index) => {
+                teamInvitations.forEach((invitation) => {
                     const listItem = document.createElement('li');
-                    listItem.innerHTML = `<strong>Team Name:</strong> ${team.team.teamName}, <strong>Invite Code:</strong> ${inviteCodes[index]}`;
+                    listItem.innerHTML = `<strong>Team Name:</strong> ${invitation.team.teamName}, <strong>Invite Code:</strong> ${invitation.inviteCode}`;
                     teamInvitationsList.appendChild(listItem);
                 });
             } catch (error) {
@@ -87,16 +86,16 @@ document.addEventListener('DOMContentLoaded', async function() {
                 alert('Error retrieving team invitations. Please try again later.');
             }
         }
-
+        
         // Handle display team invitations button click event
         document.getElementById('displayInvitationsBtn').addEventListener('click', async () => {
             // Call displayTeamInvitations function
             await displayTeamInvitations();
-
+        
             // Trigger orange rain effect
             triggerOrangeRain();
         });
-
+        
         // Handle join game button click event
         document.getElementById('joinGameBtn').addEventListener('click', async () => {
             const referral = document.getElementById('referralAddress').value; // Get referral address from input field
@@ -243,5 +242,3 @@ document.getElementById('cookBtn').addEventListener('click', async () => {
         alert('An error occurred. Please try again later.');
     }
 });
-
-
