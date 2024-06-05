@@ -1,7 +1,7 @@
 document.addEventListener('DOMContentLoaded', async function() {
     try {
         // Define the contract address
-        const contractAddress = '0x8c0d66bd6966166dfc6e2a48dd256c6a4024c9d8'; // Replace with your contract address
+        const contractAddress = '0x9beaa09183e371e1c3a9773eb62f5376d2cf25b5'; // Replace with your contract address
 
         // Load contract ABI asynchronously
         const response = await fetch('./GameToken.json');
